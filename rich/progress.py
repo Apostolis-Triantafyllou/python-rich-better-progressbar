@@ -640,6 +640,7 @@ class BarColumn(ProgressColumn):
         complete_style (StyleType, optional): Style for the completed bar. Defaults to "bar.complete".
         finished_style (StyleType, optional): Style for a finished bar. Defaults to "bar.finished".
         pulse_style (StyleType, optional): Style for pulsing bars. Defaults to "bar.pulse".
+        progresschar (str, optional): Character used for progress bar
     """
 
     def __init__(
@@ -650,12 +651,14 @@ class BarColumn(ProgressColumn):
         finished_style: StyleType = "bar.finished",
         pulse_style: StyleType = "bar.pulse",
         table_column: Optional[Column] = None,
+        progresschar: Optional[Str] = None,
     ) -> None:
         self.bar_width = bar_width
         self.style = style
         self.complete_style = complete_style
         self.finished_style = finished_style
         self.pulse_style = pulse_style
+        self.progresschar = progresschar
         super().__init__(table_column=table_column)
 
     def render(self, task: "Task") -> ProgressBar:
@@ -670,6 +673,7 @@ class BarColumn(ProgressColumn):
             complete_style=self.complete_style,
             finished_style=self.finished_style,
             pulse_style=self.pulse_style,
+            progresschar=self.progresschar,
         )
 
 
