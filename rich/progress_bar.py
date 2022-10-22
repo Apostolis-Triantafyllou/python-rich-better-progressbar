@@ -171,7 +171,7 @@ class ProgressBar(JupyterMixin):
             min(self.total, max(0, self.completed)) if self.total is not None else None
         )
 
-        bar = self.progressbar
+        bar = self.progresschar
         half_bar_right = " " if ascii else "╸"
         half_bar_left = " " if ascii else "╺"
         complete_halves = (
