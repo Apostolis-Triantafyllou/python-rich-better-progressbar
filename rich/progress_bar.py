@@ -188,9 +188,9 @@ class ProgressBar(JupyterMixin):
         )
         _Segment = Segment
         if bar_count:
-            yield _Segment(bar * bar_count, complete_style)
+            yield _Segment(bar * (bar_count * len(bar)), complete_style)
         if half_bar_count:
-            yield _Segment(half_bar_right * half_bar_count, complete_style)
+            yield _Segment(half_bar_right * (half_bar_count * len(bar)), complete_style)
 
         if not console.no_color:
             remaining_bars = width - bar_count - half_bar_count
@@ -199,7 +199,7 @@ class ProgressBar(JupyterMixin):
                     yield _Segment(half_bar_left, style)
                     remaining_bars -= 1
                 if remaining_bars:
-                    yield _Segment(bar * remaining_bars, style)
+                    yield _Segment(bar * (remaining_bars * len(bar)), style)
 
     def __rich_measure__(
         self, console: Console, options: ConsoleOptions
