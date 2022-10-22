@@ -28,6 +28,7 @@ class ProgressBar(JupyterMixin):
         finished_style (StyleType, optional): Style for a finished bar. Defaults to "bar.finished".
         pulse_style (StyleType, optional): Style for pulsing bars. Defaults to "bar.pulse".
         animation_time (Optional[float], optional): Time in seconds to use for animation, or None to use system time.
+        progresschar (Optional[str], optional): The character used by the progress bar
     """
 
     def __init__(
@@ -41,6 +42,7 @@ class ProgressBar(JupyterMixin):
         finished_style: StyleType = "bar.finished",
         pulse_style: StyleType = "bar.pulse",
         animation_time: Optional[float] = None,
+        progresschar: Optional[str] = "-" if ascii else "━",
     ):
         self.total = total
         self.completed = completed
@@ -51,6 +53,7 @@ class ProgressBar(JupyterMixin):
         self.finished_style = finished_style
         self.pulse_style = pulse_style
         self.animation_time = animation_time
+        self.progresschar = progresschar
 
         self._pulse_segments: Optional[List[Segment]] = None
 
@@ -80,7 +83,7 @@ class ProgressBar(JupyterMixin):
         Returns:
             List[Segment]: A list of segments, one segment per character.
         """
-        bar = "-" if ascii else "━"
+        bar = self.progresschar
         segments: List[Segment] = []
         if color_system not in ("standard", "eight_bit", "truecolor") or no_color:
             segments += [Segment(bar, fore_style)] * (PULSE_SIZE // 2)
