@@ -651,7 +651,7 @@ class BarColumn(ProgressColumn):
         finished_style: StyleType = "bar.finished",
         pulse_style: StyleType = "bar.pulse",
         table_column: Optional[Column] = None,
-        progresschar: Optional[Str] = None,
+        progresschar: Optional[str] = None,
     ) -> None:
         self.bar_width = bar_width
         self.style = style
